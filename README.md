@@ -1,11 +1,15 @@
 # ECC Mix Design Optimization and Uncertainty Quantification
 
-Note: This project is currently under a strict pre-publication embargo by the lab, so I am limited to discussing the conceptual framework. More details may be available upon request. Thank you for understanding.
+![Pipeline Architecture](images/pipeline_flowchart.png)
 
+> **Note on Repository Contents (Pre-Publication Embargo)**
+> This project is currently under a strict pre-publication embargo by the lab. As a result, the raw dataset and executable optimization scripts are temporarily withheld. 
+> 
+> However, this repository provides a comprehensive overview of the architectural methodology, surrogate modeling, and uncertainty quantification results. I am fully prepared to discuss the mathematical implementations, algorithm design, and code structure in detail upon request or during an interview.
 
 This repository outlines a machine learning framework for the inverse design of Engineered Cementitious Composites (ECC). By combining ensemble surrogate models with evolutionary algorithms, this project identifies cost-optimal ECC mix designs that meet specific tensile stress and strain requirements. 
 
-A core focus of this project is quantifying the uncertainty inherent in macroscopic concrete datasets, separating the model's knowledge gaps from physical lab variance.
+A core focus of this project is quantifying the uncertainty inherent in macroscopic concrete datasets, utilizing conformal prediction to bound model ignorance and stochastic simulation to test physical lab variance.
 
 ## 1. Dataset and Feature Engineering
 Standard mixture proportions are often insufficient for predicting the complex ductility of ECC. We engineered 37 features to better represent the physical interactions:
@@ -17,17 +21,25 @@ Standard mixture proportions are often insufficient for predicting the complex d
 We trained tree-based ensemble models (Extra Trees, Random Forest, Gradient Boosting) to predict ultimate stress and tensile strain. We evaluated the models on two distinct dataset formulations:
 
 * **Expanded Dataset (560 specimens):** Includes laboratory replicates to capture localized variance. Yields an R-squared of 0.84 for Stress and 0.64 for Strain.
-* **Aggregated Dataset (282 unique mixes):** Averages replicates to completely prevent data leakage and test true generalization. Yields a highly conservative baseline (Strain R-squared around 0.59), which we use as the foundation for our uncertainty quantification.
+* **Aggregated Dataset (282 unique mixes):** Averages replicates to prevent data leakage and test true generalization. Yields a highly conservative baseline (Strain R-squared around 0.59), which we use as the foundation for our uncertainty quantification.
 
 ## 3. Inverse Design Methodologies
 We approach the inverse design problem through two parallel methods:
 
-* **Ranged Approach (Probabilistic):** Uses random sampling and local refinement to identify global "safe zones." This categorizes feasibility into different budget and premium cost tiers.
+* **Ranged Approach (Probabilistic):** Uses random sampling and local refinement to identify global safe zones. This categorizes feasibility into different budget and premium cost tiers.
 * **Discrete Approach (NSGA-II):** Uses a genetic algorithm to search the 17-dimensional feature space. It mathematically defines the Pareto frontier to generate exact, cost-minimized mix recipes.
 
 ## 4. Uncertainty Quantification (UQ)
-Because our dataset lacks microscopic processing variables (like fiber dispersion or mixing speed), predicting strain carries significant uncertainty. We address this in two steps:
+Because our dataset lacks microscopic processing variables, predicting strain carries significant uncertainty. We explicitly quantify and navigate this through a two-step framework:
 
-* **Epistemic Uncertainty (Conformal Quantile Regression):** Variance decomposition shows that roughly 68% of our prediction variance is epistemic (due to data sparsity). We use CQR to generate mathematically guaranteed 80%, 90%, and 95% prediction intervals, providing honest bounds instead of single point predictions.
-* **Aleatoric Robustness (Monte Carlo Simulation):** To test if the NSGA-II recipes are physically viable, we run them through a Monte Carlo simulator. By injecting a 5% Gaussian noise to simulate human batching errors in the lab, we measure how many virtual batches fail the strain targets, outputting a real-world lab reliability score.
+* **Diagnostic Decomposition & Conformal Prediction:** We first utilize variance decomposition as a diagnostic tool, revealing that roughly 68% of our prediction variance is epistemic (driven by data sparsity and missing physical features). To capture the total predictive uncertainty, we implemented Conformal Quantile Regression (CQR). Under the assumption of exchangeability, CQR provides marginal coverage-guaranteed 80%, 90%, and 95% prediction intervals, offering honest bounds rather than point predictions.
+* **Stochastic Robustness (Monte Carlo Simulation):** While CQR bounds the model's predictive uncertainty, a recipe must also survive physical execution. We pipe the Pareto-optimal designs generated by the NSGA-II through a Monte Carlo simulator. By introducing a 5% Gaussian noise to simulate aleatoric human batching errors in the lab, we explicitly measure the recipe's real-world survival rate against target thresholds, outputting a definitive lab reliability score.
 
+## Directory Structure and Visualizations
+The `/images` directory contains key outputs from our analysis:
+
+* `pipeline_flowchart.png`: High-level methodology architecture.
+* `Feature_Engineering.png`: SHAP analysis detailing the impact of our micromechanics features.
+* `Cost_Tiers_Ranged.png`: Output from the ranged approach showing cost feasibility zones.
+* `CQR_Intervals.png`: Conformal prediction bands demonstrating the coverage of our uncertainty model.
+* `Monte_Carlo_Robustness.png`: Histograms of the stochastic stress-testing, showing the survival rate of the optimal recipe under batching noise.
