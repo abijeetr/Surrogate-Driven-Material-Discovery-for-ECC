@@ -1,6 +1,7 @@
 # ECC Mix Design Optimization and Uncertainty Quantification
 
-![Pipeline Architecture](images/pipeline_flowchart.png)
+Note: This project is currently under a strict pre-publication embargo by the lab, so I am limited to discussing the conceptual framework. More details may be available upon request. Thank you for understanding.
+
 
 This repository outlines a machine learning framework for the inverse design of Engineered Cementitious Composites (ECC). By combining ensemble surrogate models with evolutionary algorithms, this project identifies cost-optimal ECC mix designs that meet specific tensile stress and strain requirements. 
 
@@ -30,11 +31,3 @@ Because our dataset lacks microscopic processing variables (like fiber dispersio
 * **Epistemic Uncertainty (Conformal Quantile Regression):** Variance decomposition shows that roughly 68% of our prediction variance is epistemic (due to data sparsity). We use CQR to generate mathematically guaranteed 80%, 90%, and 95% prediction intervals, providing honest bounds instead of single point predictions.
 * **Aleatoric Robustness (Monte Carlo Simulation):** To test if the NSGA-II recipes are physically viable, we run them through a Monte Carlo simulator. By injecting a 5% Gaussian noise to simulate human batching errors in the lab, we measure how many virtual batches fail the strain targets, outputting a real-world lab reliability score.
 
-## Directory Structure and Visualizations
-The `/images` directory contains key outputs from our analysis:
-
-* `pipeline_flowchart.png`: High-level methodology architecture.
-* `Feature_Engineering.png`: SHAP analysis detailing the impact of our micromechanics features.
-* `Cost_Tiers_Ranged.png`: Output from the ranged approach showing cost feasibility zones.
-* `CQR_Intervals.png`: Conformal prediction bands demonstrating the coverage of our epistemic uncertainty model.
-* `Monte_Carlo_Robustness.png`: Histograms of the stochastic stress-testing, showing the survival rate of the optimal recipe under batching noise.
