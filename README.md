@@ -1,7 +1,5 @@
 # ECC Mix Design Optimization and Uncertainty Quantification
 
-![Pipeline Architecture](images/pipeline_flowchart.png)
-
 >  **Note:** This project is currently under a strict pre-publication embargo by the lab, so I am limited to discussing the conceptual framework. More details may be available upon request. Thank you for understanding.
 
 This repository outlines a machine learning framework for the inverse design of Engineered Cementitious Composites (ECC). By combining ensemble surrogate models with evolutionary algorithms, this project identifies cost-optimal ECC mix designs that meet specific tensile stress and strain requirements. 
