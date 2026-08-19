@@ -1,6 +1,6 @@
 # ECC Final Consolidated Pipeline
 
-Notebook: `ECC_FINAL_pipeline.ipynb`
+Notebook: `ECC_FINAL_pipeline.py`
 
 ## Architecture Diagram
 
