@@ -1,6 +1,6 @@
 # ECC CatBoost Mondrian CQR
 
-Notebook: `ECC_catboost_mondrian_cqr.ipynb`
+Notebook: `ECC_catboost_mondrian_cqr.py`
 
 ## Architecture Diagram
 
