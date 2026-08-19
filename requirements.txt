@@ -1,0 +1,20 @@
+
+numpy>=2.0
+pandas>=2.0
+scikit-learn>=1.5
+scipy>=1.13
+catboost>=1.2
+lightgbm>=4.0
+ngboost>=0.5
+optuna>=4.0
+shap>=0.46
+matplotlib>=3.8
+seaborn>=0.13
+openpyxl>=3.1      
+ipykernel>=6.0
+ipywidgets>=8.0
+
+# TabPFN — local inference, no API key required (v0.1.11 only — newer versions need HuggingFace auth)
+# Requires PyTorch; install torch separately if not present: pip install torch
+tabpfn==0.1.11
+torch>=2.0

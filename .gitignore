@@ -1,0 +1,42 @@
+# Ignore everything by default
+*
+
+# ── Core tracked files ────────────────────────────────────────────────────────
+!.gitignore
+!README.md
+!README_*.md
+!ECC_catboost_mondrian_cqr.ipynb
+!requirements.txt
+
+# ── data/ ─────────────────────────────────────────────────────────────────────
+!data/
+!data/*.xlsx
+!data/*.csv
+
+# ── results/ ─────────────────────────────────────────────────────────────────
+!results/
+!results/*.png
+!results/*.csv
+
+# ── other_implementations/ ───────────────────────────────────────────────────
+!other_implementations/
+!other_implementations/*.ipynb
+!other_implementations/README_*.md
+
+# ── Python / Jupyter cache ────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# ── CatBoost training logs ────────────────────────────────────────────────────
+catboost_info/
+
+# ── TabPFN — local source clone + model weight cache (kept locally, not pushed) ──
+# To set up: git clone https://github.com/automl/TabPFN.git  OR  pip install tabpfn
+# The cache dir below is where TabPFN downloads its checkpoint on first run.
+TabPFN/
+tabpfn_cache/
+.tabpfn_token
+
+# ── OS files ──────────────────────────────────────────────────────────────────
+.DS_Store
