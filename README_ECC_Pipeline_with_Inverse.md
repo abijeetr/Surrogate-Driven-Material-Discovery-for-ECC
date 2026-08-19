@@ -1,6 +1,6 @@
 # ECC Pipeline with Inverse Design
 
-Notebook: `ECC_Pipeline_with_Inverse.ipynb`
+Notebook: `ECC_Pipeline_with_Inverse.py`
 
 ## Architecture Diagram
 
