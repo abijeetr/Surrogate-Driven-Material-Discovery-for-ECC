@@ -1,6 +1,6 @@
 # ECC Pipeline Combined - Detailed Explanation
 
-Notebook: `ECC_Pipeline_Combined.ipynb`
+Notebook: `ECC_Pipeline_Combined.py`
 
 This notebook is the most complete implementation in the project. It combines:
 
@@ -10,7 +10,7 @@ This notebook is the most complete implementation in the project. It combines:
 - an OOD-aware inverse optimization patch,
 - recommendation plots and diagnostic plots.
 
-The forward model used by all inverse sections in this notebook is the same CatBoost + Mondrian CQR model trained inside `ECC_Pipeline_Combined.ipynb`.
+The forward model used by all inverse sections in this notebook is the same CatBoost + Mondrian CQR model trained inside `ECC_Pipeline_Combined.py`.
 
 ## Full Architecture
 
