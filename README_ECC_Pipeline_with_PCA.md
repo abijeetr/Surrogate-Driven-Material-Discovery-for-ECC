@@ -1,6 +1,6 @@
 # ECC Pipeline with PCA
 
-Notebook: `ECC_Pipeline_with_PCA.ipynb`
+Notebook: `ECC_Pipeline_with_PCA.py`
 
 ## Architecture Diagram
 
